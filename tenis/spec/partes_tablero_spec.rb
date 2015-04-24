@@ -7,6 +7,4 @@ describe 'PartesTablero' do
 		partes_tablero.elem1.should be 0
 		partes_tablero.elem2.should be 0
 	end
-	
-	
 end

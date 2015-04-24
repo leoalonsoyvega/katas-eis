@@ -4,5 +4,4 @@ class PartesTablero
 	end
 
 	attr_accessor = :elem1, :elem2
-
-	
+end
