@@ -20,6 +20,6 @@ describe 'SetT' do
 		set.next(1)
 		set.elem1.should be 0
 		set.elem2.should be 0
-
+	end
 
 end

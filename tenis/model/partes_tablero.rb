@@ -20,4 +20,9 @@ class PartesTablero
 			self.elem2 = new_elem
 		end
 	end
+
+	def reset
+		self.setElem(1,0)
+		self.setElem(2,0)
+	end
 end
