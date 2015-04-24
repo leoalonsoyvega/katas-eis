@@ -24,4 +24,15 @@ describe 'PartesTablero' do
 		partes.elem1.should be 30
 		partes.elem2.should be 15
 	end
+
+	it 'reset() pone elem1, elem2 en 0, 0' do
+		partes = PartesTablero.new
+		partes.setElem(1,22)
+		partes.setElem(2,11)
+		partes.elem1.should be 22
+		partes.elem2.should be 11
+		partes.reset()
+		partes.elem1.should be 0
+		partes.elem2.should be 0
+	end
 end
