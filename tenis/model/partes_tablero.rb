@@ -12,5 +12,12 @@ class PartesTablero
 			self.elem2
 		end
 	end
-	
+
+	def setElem(num, new_elem)
+		if num == 1
+			self.elem1 = new_elem
+		else
+			self.elem2 = new_elem
+		end
+	end
 end
