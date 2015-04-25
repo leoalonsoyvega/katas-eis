@@ -11,4 +11,12 @@ class TableroTenis
 
 	attr_reader :set, :game, :point
 
+	def pointA()
+		self.point.next(1)
+	end
+
+	def pointB()
+		self.point.next(2)
+	end
+
 end
