@@ -31,7 +31,27 @@ describe 'TableroTenis' do
 		tablero_t.pointA()
 		tablero_t.point.elem1.should be 0 # elem1 y elem2 == 0 , 0
 		tablero_t.point.elem1.should be 0 
-		
+	end
+
+	it 'pointA() y pointB() -> verificar si se modifica game' do
+		set = SetT.new
+		game = Game.new(set)
+		point = Point.new(game)
+		tablero_t = TableroTenis.new(set,game,point)
+		tablero_t.point.elem1 = 40
+		tablero_t.game.elem1.should be 0
+		tablero_t.pointA()
+		tablero_t.game.elem1.should be 1
+		tablero_t.game.elem2.should be 0
+		tablero_t.pointB()
+		tablero_t.game.elem1.should be 1
+		tablero_t.game.elem1.should be 1
+		tablero_t.pointA()
+		tablero_t.game.elem1.should be 2
+		tablero_t.game.elem2.should be 1
+		tablero_t.pointB()
+		tablero_t.game.elem1.should be 2
+		tablero_t.game.elem2.should be 2
 	end
 
 end
