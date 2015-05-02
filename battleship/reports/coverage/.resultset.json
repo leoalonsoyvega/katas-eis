@@ -1,0 +1,21 @@
+{
+  "RSpec": {
+    "coverage": {
+    },
+    "timestamp": 1430606180
+  },
+  "Cucumber Features": {
+    "coverage": {
+      "/home/leonardo/Escritorio/katas-eis/battleship/app/models/Board.rb": [
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null
+      ]
+    },
+    "timestamp": 1430606182
+  }
+}
