@@ -25,4 +25,8 @@ class Board
   	self.ships[x][y+1] = large_ship
   end
 
+  def shoot x,y
+  	self.ships[x][y].shoot
+  end
+
 end
