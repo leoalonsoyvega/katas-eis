@@ -2,14 +2,18 @@ require_relative 'Ship.rb'
 
 class LargeShip < Ship 
 
+	attr_accessor :hit
+	
+	def initialize
+		@hit = 0
+	end
+	
 	def shoot
 
-		@hit = 0
-
-		if @hit == 1
+		if self.hit == 1
 			"Sink"
 		else
-			@hit += 1
+			self.hit += 1
 			"Hit"
 		end
 	end

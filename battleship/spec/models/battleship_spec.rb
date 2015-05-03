@@ -26,9 +26,13 @@ describe 'Battleship' do
     expect(@board.is_empty? 3,3).to eq false
   end
 
-  it 'shoot board 3:3' do 
-    @board.create_large_ship 3,3
-    expect(@board.shoot 3,3).to eq "Hit"
+  it 'shoot board large_ship 2:2' do 
+    @board.create_large_ship 2,2
+    expect(@board.shoot 2,2).to eq "Hit"
+  end
+
+  it 'shoot board water 1:1' do
+    expect(@board.shoot 1,1).to eq "Water"
   end
 
 end
