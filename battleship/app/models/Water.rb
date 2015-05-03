@@ -2,7 +2,7 @@ require_relative 'Ship.rb'
 
 class Water < Ship
 
-	def shot
+	def shoot
 		"Water"
 	end
 end

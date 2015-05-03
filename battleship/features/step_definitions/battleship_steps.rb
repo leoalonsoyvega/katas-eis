@@ -5,10 +5,15 @@ Given(/^a board with dimensions "(.*?)" x "(.*?)"$/) do |arg1, arg2|
 end
 
 Given(/^I create a small ship in position "(.*?):(.*?)"$/) do |arg1, arg2|
-  @board.create_small_ship arg1.to_i ,arg2.to_i
+  @board.create_small_ship arg1.to_i, arg2.to_i
 end
 
-Then(/^position "(.*?):(.*?)" is not empty$/) do |arg1, arg2|
+Then(/^position "(\d+):(\d+)" is not empty$/) do |arg1, arg2|
   expect(@board.is_empty? arg1.to_i, arg2.to_i).to eq false
 
 end
+
+Given(/^I create a large ship in position "(.*?):(.*?)"$/) do |arg1, arg2|
+  @board.create_large_ship arg1.to_i, arg2.to_i
+end
+

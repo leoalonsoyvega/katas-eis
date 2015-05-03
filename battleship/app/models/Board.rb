@@ -1,6 +1,6 @@
 require_relative 'Water.rb'
 require_relative 'SmallShip.rb'
-require_relative 'LangerShip.rb'
+require_relative 'LargeShip.rb'
 
 class Board
   attr_reader :size
@@ -17,6 +17,12 @@ class Board
 
   def create_small_ship x,y
 	self.ships[x][y] = SmallShip.new
+  end
+
+  def create_large_ship x,y
+  	large_ship = LargeShip.new
+  	self.ships[x][y] = large_ship
+  	self.ships[x][y+1] = large_ship
   end
 
 end
