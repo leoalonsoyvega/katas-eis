@@ -2,7 +2,7 @@
   "RSpec": {
     "coverage": {
     },
-    "timestamp": 1430606180
+    "timestamp": 1430620345
   },
   "Cucumber Features": {
     "coverage": {
@@ -10,12 +10,70 @@
         1,
         1,
         1,
+        null,
         1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        31,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null
+      ],
+      "/home/leonardo/Escritorio/katas-eis/battleship/app/models/Water.rb": [
+        1,
+        null,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null
+      ],
+      "/home/leonardo/Escritorio/katas-eis/battleship/app/models/Ship.rb": [
+        1,
+        null,
+        null
+      ],
+      "/home/leonardo/Escritorio/katas-eis/battleship/app/models/SmallShip.rb": [
+        1,
+        null,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null
+      ],
+      "/home/leonardo/Escritorio/katas-eis/battleship/app/models/LangerShip.rb": [
+        1,
+        null,
+        1,
+        null,
+        1,
+        null,
+        0,
+        null,
+        0,
+        0,
+        null,
+        0,
+        0,
         null,
         null,
         null
       ]
     },
-    "timestamp": 1430606182
+    "timestamp": 1430620348
   }
 }
