@@ -16,3 +16,7 @@ end
 Then(/^I get water$/) do
   expect(@resultado).to eq "Water"
 end
+
+Then(/^I get sink$/) do
+  expect(@resultado).to eq "Sink"
+end
