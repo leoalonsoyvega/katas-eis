@@ -3,6 +3,7 @@ set -e
 bundle install
 cd char_counter
 bundle exec rake
-cd ..
-cd tenis
+cd ../tenis
+bundle exec rake
+cd ../battleship
 bundle exec rake
