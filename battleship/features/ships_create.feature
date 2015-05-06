@@ -12,7 +12,3 @@ Scenario: Create a large ship in a valid location
     Then position "3:3" is not empty    
     And position "3:4" is not empty    
 
-@wip
-Scenario: Create a ship in a invalid location
-	When I create a ship in position "14:12"
-	And it should raise error "invalid position"

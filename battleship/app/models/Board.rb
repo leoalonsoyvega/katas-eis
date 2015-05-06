@@ -20,9 +20,10 @@ class Board
   end
 
   def create_small_ship x,y
-	   if self.invalid_position?(x,y) && is_empty?(x,y)
+	  if self.invalid_position?(x,y)
       self.ships[x-1][y-1] = SmallShip.new
     end
+
   end
 
   def create_large_ship x,y
@@ -35,7 +36,7 @@ class Board
 
   def ship_shoot_at_position x,y
     if invalid_position?(x,y)
-    self.ships[x-1][y-1].shoot
+      self.ships[x-1][y-1].shoot
     else
       raise "Out of board!"
     end
