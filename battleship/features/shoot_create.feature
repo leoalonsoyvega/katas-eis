@@ -17,3 +17,7 @@ Scenario: Shoot and sink
     Then I get hit
 And I shoot to position “3:3”
     Then I get sink
+
+Scenario: Shoot outside of board
+	When i shoot to position "14:12"
+	Then it should raise error "Out of board!" 

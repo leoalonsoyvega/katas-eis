@@ -21,3 +21,15 @@ end
 Then(/^I get sink$/) do
   expect(@result_2).to eq "sink"
 end
+
+When(/^i shoot to position "(.*?):(.*?)"$/) do |arg1, arg2 |
+  begin
+ 	@board.ship_shoot_at_position arg1.to_i, arg2.to_i
+	rescue => @error
+  end 
+end
+
+Then(/^it should raise error "(.*?)"$/) do |arg1|
+  expect(@error.message).to eq arg1.to_s
+end
+

@@ -16,11 +16,11 @@ class Board
   end
 
   def invalid_position? x,y
-    x-1 < self.size[0] && y-1 < self.size[1] && is_empty?(x,y)
+    x-1 < self.size[0] && y-1 < self.size[1] && x-1 >= 0 && y-1 >= 0
   end
 
   def create_small_ship x,y
-	   if self.invalid_position?(x,y)
+	   if self.invalid_position?(x,y) && is_empty?(x,y)
       self.ships[x-1][y-1] = SmallShip.new
     end
   end
@@ -34,7 +34,10 @@ class Board
   end
 
   def ship_shoot_at_position x,y
-  	self.ships[x-1][y-1].shoot
+    if invalid_position?(x,y)
+    self.ships[x-1][y-1].shoot
+    else
+      raise "Out of board!"
+    end
   end
-
 end
