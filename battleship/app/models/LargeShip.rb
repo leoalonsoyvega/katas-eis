@@ -5,16 +5,16 @@ class LargeShip < Ship
 	attr_accessor :hit
 	
 	def initialize
-		@hit = 0
+		@hit = false
 	end
 	
 	def shoot
 
-		if self.hit == 1
-			"Sink"
+		if self.hit
+			"sink"
 		else
-			self.hit += 1
-			"Hit"
+			self.hit = true
+			"hit"
 		end
 	end
 end

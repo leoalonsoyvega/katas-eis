@@ -16,23 +16,28 @@ describe 'Battleship' do
     expect(@board.size[1]).to eq 5
   end
 
-  it 'create smallship in location 3:3' do
+  it 'create smallship in location 3:3 and @board.is_empty? 3:3 => false' do
     @board.create_small_ship 3,3
     expect(@board.is_empty? 3,3).to eq false
   end
 
-  it 'create large in location 3:3' do 
-    @board.create_large_ship 3,3
-    expect(@board.is_empty? 3,3).to eq false
-  end
-
-  it 'shoot board large_ship 2:2' do 
+  it 'create large in location 2:2, @board.is_empty? 2:2 => false and @board.is_empty? 2:3 => false' do 
     @board.create_large_ship 2,2
-    expect(@board.shoot 2,2).to eq "Hit"
+    expect(@board.is_empty? 2,2).to eq false
+    expect(@board.is_empty? 2,3).to eq false
   end
 
-  it 'shoot board water 1:1' do
-    expect(@board.shoot 1,1).to eq "Water"
+  it 'should @board.ship_shoot_at_position 2:2 => hit and @boad.ship_shoot_at_position 2:3 => sink' do 
+    @board.create_large_ship 2,2
+    expect(@board.ship_shoot_at_position 2,2).to eq "hit"
+    expect(@board.ship_shoot_at_position 2,3).to eq "sink"
   end
 
+  it 'should @board.ship_shoot_at_position 1:1 => water' do
+    expect(@board.ship_shoot_at_position 1,1).to eq "water"
+  end
+
+  it 'should @board.invalid_position? 14:12 => true' do
+      expect(@board.invalid_position? 14,12).to eq false
+  end
 end

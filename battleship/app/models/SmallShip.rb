@@ -3,6 +3,6 @@ require_relative 'Ship.rb'
 class SmallShip < Ship
 
 	def shoot
-		"Hit"
+		"hit"
 	end
 end

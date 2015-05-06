@@ -2,21 +2,22 @@ require_relative '../../app/models/Board.rb'
 
 
 Given(/^a large ship in position: “(\d+):(\d+)”$/) do |arg1, arg2|
-  @board.create_large_ship 3,3
+  @result_1 = @board.ship_shoot_at_position arg1.to_i, arg1.to_i
+  @board.create_large_ship arg1.to_i, arg2.to_i
 end
 
 Given(/^I shoot to position “(\d+):(\d+)”$/) do |arg1, arg2|
-  @resultado = @board.shoot arg1.to_i, arg1.to_i
+  @result_2 = @board.ship_shoot_at_position arg1.to_i, arg1.to_i
 end
 
 Then(/^I get hit$/) do
-  expect(@resultado).to eq "Hit"
+  expect(@result_2).to eq "hit"
 end
 
 Then(/^I get water$/) do
-  expect(@resultado).to eq "Water"
+  expect(@result_1).to eq "water"
 end
 
 Then(/^I get sink$/) do
-  expect(@resultado).to eq "Sink"
+  expect(@result_2).to eq "sink"
 end

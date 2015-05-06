@@ -7,26 +7,34 @@ class Board
   attr_accessor :ships
   
   def initialize(x,y)
-    @size = [x,y]
-    @ships = Array.new(x).map!{Array.new(y) {Water.new}}
+      @size = [x,y]
+      @ships = Array.new(x).map!{Array.new(y) {Water.new}}
   end
 
   def is_empty? x,y
-	self.ships[x][y].kind_of? Water
+	   self.ships[x-1][y-1].is_empty?
+  end
+
+  def invalid_position? x,y
+    x-1 < self.size[0] && y-1 < self.size[1] && is_empty?(x,y)
   end
 
   def create_small_ship x,y
-	self.ships[x][y] = SmallShip.new
+	   if self.invalid_position?(x,y)
+      self.ships[x-1][y-1] = SmallShip.new
+    end
   end
 
   def create_large_ship x,y
-  	large_ship = LargeShip.new
-  	self.ships[x][y] = large_ship
-  	self.ships[x][y+1] = large_ship
+    if self.invalid_position?(x,y)
+      large_ship = LargeShip.new
+  	  self.ships[x-1][y-1] = large_ship 
+      self.ships[x-1][y] = large_ship
+    end
   end
 
-  def shoot x,y
-  	self.ships[x][y].shoot
+  def ship_shoot_at_position x,y
+  	self.ships[x-1][y-1].shoot
   end
 
 end
