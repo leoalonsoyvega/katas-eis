@@ -1,69 +1,76 @@
+require_relative 'models/Board.rb'
+
 module Battleship
   class App < Padrino::Application
     register Padrino::Rendering
-    register Padrino::Mailer
     register Padrino::Helpers
-    register Padrino::Sprockets
-    #register Padrino::Admin::AccessControl
-    sprockets :minify => (Padrino.env == :production)
 
     enable :sessions
     
     get '/' do
-        File.read(File.join('public', 'index.html'))
+      File.read(File.join('public', 'index.html'))
     end
 
+    get 'mipagina' do
+      render 'batalla/inicio'
+    end
 
-    ##
-    # Caching support
-    #
-    # register Padrino::Cache
-    # enable :caching
-    #
-    # You can customize caching store engines:
-    #
-    # set :cache, Padrino::Cache::Store::Memcache.new(::Memcached.new('127.0.0.1:11211', :exception_retry_limit => 1))
-    # set :cache, Padrino::Cache::Store::Memcache.new(::Dalli::Client.new('127.0.0.1:11211', :exception_retry_limit => 1))
-    # set :cache, Padrino::Cache::Store::Redis.new(::Redis.new(:host => '127.0.0.1', :port => 6379, :db => 0))
-    # set :cache, Padrino::Cache::Store::Memory.new(50)
-    # set :cache, Padrino::Cache::Store::File.new(Padrino.root('tmp', app_name.to_s, 'cache')) # default choice
-    #
+    post 'create_board' do
+      @x_board = params[:x_board]
+      @y_board = params[:y_board]
+      @board = Board.new @x_board.to_i, @y_board.to_i
+      session[:board] = @board
+      @info_board = @x_board.to_s + ' : ' + @y_board.to_s
+      render 'batalla/inicio'
+    end
 
-    ##
-    # Application configuration options
-    #
-    # set :raise_errors, true       # Raise exceptions (will stop application) (default for test)
-    # set :dump_errors, true        # Exception backtraces are written to STDERR (default for production/development)
-    # set :show_exceptions, true    # Shows a stack trace in browser (default for development)
-    # set :logging, true            # Logging in STDOUT for development and file for production (default only for development)
-    # set :public_folder, 'foo/bar' # Location for static assets (default root/public)
-    # set :reload, false            # Reload application files (default in development)
-    # set :default_builder, 'foo'   # Set a custom form builder (default 'StandardFormBuilder')
-    # set :locale_path, 'bar'       # Set path for I18n translations (default your_apps_root_path/locale)
-    # disable :sessions             # Disabled sessions by default (enable if needed)
-    # disable :flash                # Disables sinatra-flash (enabled by default if Sinatra::Flash is defined)
-    # layout  :my_layout            # Layout can be in views/layouts/foo.ext or views/foo.ext (default :application)
-    #
+    post 'create_small_ship' do
+      @x_s = params[:x_s]
+      @y_s = params[:y_s]
+      begin
+        session[:board].create_small_ship @x_s.to_i, @y_s.to_i
+        @info_s = @x_s.to_s + ' : ' + @y_s.to_s
+      rescue OutOfBoardException => excep
+        @info_s = excep.message
+      end
+      render 'batalla/inicio'
+    end
 
-    ##
-    # You can configure for a specified environment like:
-    #
-    #   configure :development do
-    #     set :foo, :bar
-    #     disable :asset_stamp # no asset timestamping for dev
-    #   end
-    #
+    post 'create_large_ship' do
+      @x_l = params[:x_l]
+      @y_l = params[:y_l]
+      begin
+        session[:board].create_large_ship @x_l.to_i, @y_l.to_i
+        @info_l = @x_l.to_s + ' : ' + @y_l.to_s
+      rescue OutOfBoardException => excep
+        @info_l = excep.message
+      end
+      render 'batalla/inicio'
+    end
 
-    ##
-    # You can manage errors like:
-    #
-    #   error 404 do
-    #     render 'errors/404'
-    #   end
-    #
-    #   error 505 do
-    #     render 'errors/505'
-    #   end
-    #
+    post 'shoot_ship' do 
+      @x_shoot = params[:x_shoot]
+      @y_shoot = params[:y_shoot]
+      begin
+        @info_shoot = session[:board].ship_shoot_at_position @x_shoot.to_i,@y_shoot.to_i
+      rescue OutOfBoardException => excep
+        @info_shoot = excep.message
+      end
+      render 'batalla/inicio'
+    end
+
+    post 'is_empty' do 
+      @x_e = params[:x_e]
+      @y_e = params[:y_e]
+      begin
+        @info_e = (session[:board].is_empty? @x_e.to_i, @y_e.to_i).to_s
+      rescue OutOfBoardException => excep
+        @info_e = excep.message
+      end
+      render 'batalla/inicio'
+    end
+    
+
+
   end
 end

@@ -37,7 +37,7 @@ describe 'Battleship' do
     expect(@board.ship_shoot_at_position 1,1).to eq "water"
   end
 
-  it 'should @board.invalid_position? 14:12 => true' do
-      expect(@board.invalid_position? 14,12).to eq false
+  it 'should @board.invalid_position? 14:12 => OutOfBoardException' do
+     expect{@board.invalid_position? 14,12}.to raise_exception OutOfBoardException
   end
 end

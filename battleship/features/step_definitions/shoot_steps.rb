@@ -25,7 +25,7 @@ end
 When(/^i shoot to position "(.*?):(.*?)"$/) do |arg1, arg2 |
   begin
  	@board.ship_shoot_at_position arg1.to_i, arg2.to_i
-	rescue => @error_shoot
+	rescue OutOfBoardException => @error_shoot
   end 
 end
 

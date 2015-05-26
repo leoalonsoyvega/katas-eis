@@ -20,5 +20,5 @@ And I shoot to position “3:3”
 
 Scenario: Shoot outside of board
 	When i shoot to position "14:12"
-	Then it should raise error "Out of board!" 
+	Then it should raise error "Out of board !!!" 
 

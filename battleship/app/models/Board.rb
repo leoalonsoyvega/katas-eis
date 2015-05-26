@@ -1,6 +1,7 @@
 require_relative 'Water.rb'
 require_relative 'SmallShip.rb'
 require_relative 'LargeShip.rb'
+require_relative 'OutOfBoardException.rb'
 
 class Board
   attr_reader :size
@@ -12,33 +13,35 @@ class Board
   end
 
   def is_empty? x,y
-	   self.ships[x-1][y-1].is_empty?
+	   self.invalid_position?(x,y)
+     self.ships[x][y].is_empty?
   end
 
   def invalid_position? x,y
-    x-1 < self.size[0] && y-1 < self.size[1] && x-1 >= 0 && y-1 >= 0
+    unless @size[0] > x && @size[1] > y
+      raise OutOfBoardException.new
+    end
   end
 
   def create_small_ship x,y
-	  if self.invalid_position?(x,y)
-      self.ships[x-1][y-1] = SmallShip.new
-    end
+	  self.invalid_position?(x,y)
+    self.ships[x][y] = SmallShip.new
+  
 
   end
 
   def create_large_ship x,y
-    if self.invalid_position?(x,y)
+      self.invalid_position?(x,y)
+      self.invalid_position?(x,y+1)
       large_ship = LargeShip.new
-  	  self.ships[x-1][y-1] = large_ship 
-      self.ships[x-1][y] = large_ship
-    end
+  	  self.ships[x][y] = large_ship 
+      self.ships[x][y+1] = large_ship
+    
   end
 
   def ship_shoot_at_position x,y
-    if invalid_position?(x,y)
-      self.ships[x-1][y-1].shoot
-    else
-      raise "Out of board!"
-    end
+      self.invalid_position?(x,y)
+      self.ships[x][y].shoot
   end
+
 end
