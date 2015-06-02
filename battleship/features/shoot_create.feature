@@ -1,5 +1,6 @@
 Feature: Shoot
 
+
 Background:
     Given a board with dimensions "5" x "5"
     And a large ship in position: “3:3”
@@ -18,7 +19,5 @@ Scenario: Shoot and sink
 And I shoot to position “3:3”
     Then I get sink
 
-Scenario: Shoot outside of board
-	When i shoot to position "14:12"
-	Then it should raise error "Out of board !!!" 
-
+Scenario: Create a large ship in an invalid location
+    When I create a large ship in position "14:12" it should fail with "Out of board !!!"

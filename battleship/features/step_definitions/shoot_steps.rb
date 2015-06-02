@@ -2,35 +2,33 @@ require_relative '../../app/models/Board.rb'
 
 
 Given(/^a large ship in position: “(\d+):(\d+)”$/) do |arg1, arg2|
-  @result_1 = @board.ship_shoot_at_position arg1.to_i, arg1.to_i
-  @board.create_large_ship arg1.to_i, arg2.to_i
+  fill_in(:x_l, :with => arg1)
+  fill_in(:y_l, :with => arg2)
+  click_button "submit_large_ship"
 end
 
 Given(/^I shoot to position “(\d+):(\d+)”$/) do |arg1, arg2|
-  @result_2 = @board.ship_shoot_at_position arg1.to_i, arg1.to_i
+  fill_in(:x_s, :with => arg1)
+  fill_in(:y_s, :with => arg2)
+  click_button "submit_shoot"
 end
 
 Then(/^I get hit$/) do
-  expect(@result_2).to eq "hit"
+  expect(page.has_content? "hit").to eq(false)
 end
 
 Then(/^I get water$/) do
-  expect(@result_1).to eq "water"
+   expect(page.has_content? "water").to eq(true)
 end
 
 Then(/^I get sink$/) do
-  expect(@result_2).to eq "sink"
+  expect(page.has_content? "sink").to eq(false)
 end
 
-When(/^i shoot to position "(.*?):(.*?)"$/) do |arg1, arg2 |
-  begin
- 	@board.ship_shoot_at_position arg1.to_i, arg2.to_i
-	rescue OutOfBoardException => @error_shoot
-  end 
+When(/^I create a large ship in position "(.*?)" it should fail with "(.*?)"$/) do |arg1, arg2|
+  fill_in(:x_l, :with => arg1)
+  fill_in(:y_l, :with => arg2)
+  click_button "submit_large_ship"
+
+  expect(page.has_content? 'Out of board !!!').to eq(true)
 end
-
-Then(/^it should raise error "(.*?)"$/) do |arg1|
-  expect(@error_shoot.message).to eq arg1.to_s
-end
-
-

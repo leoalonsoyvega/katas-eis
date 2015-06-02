@@ -8,19 +8,15 @@ module Battleship
     enable :sessions
     
     get '/' do
-      File.read(File.join('public', 'index.html'))
-    end
-
-    get 'mipagina' do
       render 'batalla/inicio'
     end
-
+ 
     post 'create_board' do
       @x_board = params[:x_board]
       @y_board = params[:y_board]
       @board = Board.new @x_board.to_i, @y_board.to_i
       session[:board] = @board
-      @info_board = @x_board.to_s + ' : ' + @y_board.to_s
+      @info_board = @x_board.to_s + ' x ' + @y_board.to_s
       render 'batalla/inicio'
     end
 
@@ -29,7 +25,7 @@ module Battleship
       @y_s = params[:y_s]
       begin
         session[:board].create_small_ship @x_s.to_i, @y_s.to_i
-        @info_s = @x_s.to_s + ' : ' + @y_s.to_s
+        @info_s = @x_s.to_s + ' x ' + @y_s.to_s
       rescue OutOfBoardException => excep
         @info_s = excep.message
       end
@@ -41,7 +37,7 @@ module Battleship
       @y_l = params[:y_l]
       begin
         session[:board].create_large_ship @x_l.to_i, @y_l.to_i
-        @info_l = @x_l.to_s + ' : ' + @y_l.to_s
+        @info_l = @x_l.to_s + ' x ' + @y_l.to_s
       rescue OutOfBoardException => excep
         @info_l = excep.message
       end
